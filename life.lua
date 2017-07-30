@@ -50,7 +50,7 @@ end
 ------------------------------------------------------------------------------------------------------
 --- gives you all the neighbours of a cell in a table
 -- solution from stack overflow
--- @param array the cell data table
+-- @param table array for the cell data table
 -- @param x x coordinate for cell
 -- @param y y coordinate for cell
 -- @return table with all the neighbours
@@ -69,6 +69,30 @@ function life.get_neighbours(array, x, y)
             end
     end
     return neighbours
+end
+
+
+------------------------------------------------------------------------------------------------------
+--- returns true if the cell is under populated and false otherwise
+-- if the cell has less than 2 live neighbours it is underpopulated
+-- @param table array for the cell data table
+-- @param x x coordinate for cell
+-- @param y y coordinate for cell
+-- @return boolean
+------------------------------------------------------------------------------------------------------
+function life.under_population_check(array, x, y)
+    neighbours = life.get_neighbours(array, x, y)
+    alive = 0
+    for _, state in pairs(neighbours) do
+        if state == 1 then
+            alive = alive + 1
+        end
+    end
+    if alive < 2 then
+        return true
+    else
+        return false
+    end
 end
 
 return life

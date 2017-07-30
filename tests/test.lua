@@ -40,3 +40,15 @@ local function test_get_neighbour_out_of_bounds()
     end
     assert(sum == 1)
 end
+
+local function test_true_if_underpopulated()
+    game_table = life.generate_2darray(10,10)
+    assert(life.under_population_check(game_table, 1, 1) == true)
+end
+
+local function test_false_if_not_underpopulated()
+    game_table = life.generate_2darray(10,10)
+    life.set_cell(game_table, 1, 2, 1)
+    life.set_cell(game_table, 2, 1, 1)
+    assert(life.under_population_check(game_table, 1, 1) == false)
+end
