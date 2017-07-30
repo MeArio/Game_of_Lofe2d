@@ -119,4 +119,28 @@ function life.overpopulation_check(array, x, y)
     end
 end
 
+
+------------------------------------------------------------------------------------------------------
+--- returns true if the cell can reproduce
+-- any cell with exactly 3 live neighbours can reproduce
+-- @param table array for the cell data table
+-- @param x x coordinate for cell
+-- @param y y coordinate for cell
+-- @return boolean
+------------------------------------------------------------------------------------------------------
+function life.reproduction_check(array, x, y)
+    neighbours = life.get_neighbours(array, x, y)
+    alive = 0
+    for _, state in pairs(neighbours) do
+        if state == 1 then
+            alive = alive + 1
+        end
+    end
+    if alive == 3 then
+        return true
+    else
+        return false
+    end
+end
+
 return life

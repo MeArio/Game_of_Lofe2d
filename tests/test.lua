@@ -61,3 +61,11 @@ local function test_true_overpopulated()
     life.set_cell(game_table, 6, 6, 1)
     assert(life.overpopulation_check(game_table, 5, 5) == true)
 end
+
+local function test_true_reproduction()
+    game_table = life.generate_2darray(10, 10)
+    life.set_cell(game_table, 5, 6, 1)
+    life.set_cell(game_table, 5, 4, 1)
+    life.set_cell(game_table, 6, 5, 1)
+    assert(life.reproduction_check(game_table, 5, 5) == true)
+end
