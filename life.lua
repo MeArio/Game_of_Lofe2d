@@ -49,45 +49,25 @@ end
 
 ------------------------------------------------------------------------------------------------------
 --- gives you all the neighbours of a cell in a table
--- I couldn't wrap my mind around proper coding of a
--- function like this so I did it the dumb way, will have to fix it, bad function
+-- solution from stack overflow
 -- @param array the cell data table
 -- @param x x coordinate for cell
 -- @param y y coordinate for cell
--- @return table with all the neighbours (not in any order)
+-- @return table with all the neighbours
 ------------------------------------------------------------------------------------------------------
 function life.get_neighbours(array, x, y)
-    width = #array[1]
-    height = #array
     neighbours = {}
-    if x - 1 >= 0 then
-        table.insert(neighbours, life.get_cell(array, x - 1, y))
-        if y - 1 >= 0 then
-            table.insert(neighbours, life.get_cell(array, x - 1,  y - 1))
-        end
-        if y + 1 <= height then
-            table.insert(neighbours, life.get_cell(array, x - 1, y + 1))
-        end
+    row_limit = #array
+    if row_limit > 0 then
+            collumn_limit = #array[1]
+            for xcol=math.max(1, x-1),  math.min(x+1, row_limit) do
+                for ycol=math.max(1, y-1), math.min(y+1, collumn_limit) do
+                    if (x ~= xcol) or (y ~= ycol) then
+                        table.insert(neighbours, life.get_cell(array, xcol, ycol))
+                    end
+                end
+            end
     end
-
-    if x + 1 <= width then
-        table.insert(neighbours, life.get_cell(array, x + 1, y))
-        if y - 1 >= 0 then
-            table.insert(neighbours, life.get_cell(array, x + 1, y - 1))
-        end
-        if y + 1 <= height then
-            table.insert(neighbours, life.get_cell(array, x + 1, y + 1))
-        end
-    end
-
-    if y + 1 <= width then
-        table.insert(neighbours, life.get_cell(array, x, y + 1))
-    end
-
-    if y - 1 <= height then
-        table.insert(neighbours, life.get_cell(array, x, y - 1))
-    end
-
     return neighbours
 end
 
