@@ -143,4 +143,51 @@ function life.reproduction_check(array, x, y)
     end
 end
 
+------------------------------------------------------------------------------------------------------
+--- steps trough a generation and returns the next one as a table
+-- checks the rules for every pixel then applies them and at the end returns a new table
+-- @param table current generation
+-- @return table next generation
+function life.step_a_generation(game_table)
+    next_gen = life.generate_2darray(#game_table, #game_table[1])
+    for y=1, #game_table do
+        for x=1, #game_table[1] do
+            alive = life.get_cell(game_table, x, y)
+            if alive == 1 then
+                if life.underpopulation_check(game_table, x, y) then
+                    print("underpop")
+                    life.set_cell(next_gen, x, y, 0)
+                elseif life.overpopulation_check(game_table, x, y) then
+                    life.set_cell(next_gen, x, y, 0)
+                else
+                    life.set_cell(next_gen, x, y, 1)
+                end
+            elseif alive == 0 then
+                if life.reproduction_check(game_table, x, y) then
+                    life.set_cell(next_gen, x, y, 1)
+                end
+            end
+        end
+    end
+    return next_gen
+end
+
+------------------------------------------------------------------------------------------------------
+--- clones a lua 2d array table since they are passed by refference
+-- @param table 2d array to be copied
+-- @return cloned 2d array
+function life.clone_game_table(game_table)
+    height = #game_table
+    width = #game_table[1]
+    clone_table = life.generate_2darray(width, height)
+    for x=1, width do
+        for y=1, height do
+            if life.get_cell(game_table, x, y) == 1 then
+                life.set_cell(clone_table, x, y, 1)
+            end
+        end
+    end
+    return clone_table
+end
+
 return life
