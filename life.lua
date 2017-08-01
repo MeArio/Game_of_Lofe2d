@@ -1,6 +1,7 @@
 --- The game of life module to be used in this Love2D project, handles logic.
 -- @module life_logic
 
+-- luacheck: globals love
 local life = {}
 
 
@@ -12,7 +13,7 @@ local life = {}
 -- @return a 2d array (table)
 ------------------------------------------------------------------------------------------------------
 function life.generate_2darray(w, h)
-    local array = {}
+    array = {}
     for i = 1, h do
         array[i]= {}
         for j = 1, w do
@@ -60,8 +61,8 @@ function life.get_neighbours(array, x, y)
     row_limit = #array
     if row_limit > 0 then
             collumn_limit = #array[1]
-            for xcol=math.max(1, x-1),  math.min(x+1, row_limit) do
-                for ycol=math.max(1, y-1), math.min(y+1, collumn_limit) do
+            for ycol=math.max(1, y-1),  math.min(y+1, row_limit) do
+                for xcol=math.max(1, x-1), math.min(x+1, collumn_limit) do
                     if (x ~= xcol) or (y ~= ycol) then
                         table.insert(neighbours, life.get_cell(array, xcol, ycol))
                     end
@@ -184,6 +185,24 @@ function life.clone_game_table(game_table)
         end
     end
     return clone_table
+end
+
+------------------------------------------------------------------------------------------------------
+--- draws the given game table
+-- @param table game table
+-- @param pixel scale
+function life.draw_table(game_table, scale)
+    height = #game_table
+    width = #game_table[1]
+    love.graphics.clear( )
+    for x=1, width do
+        for y=1, height do
+            if life.get_cell(game_table, x, y) == 1 then
+                love.graphics.setColor(255, 255, 255)
+                love.graphics.rectangle('fill', x * scale, y * scale, scale, scale)
+            end
+        end
+    end
 end
 
 return life
