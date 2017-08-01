@@ -191,10 +191,10 @@ end
 --- draws the given game table
 -- @param table game table
 -- @param pixel scale
+------------------------------------------------------------------------------------------------------
 function life.draw_table(game_table, scale)
     height = #game_table
     width = #game_table[1]
-    love.graphics.clear( )
     for x=1, width do
         for y=1, height do
             if life.get_cell(game_table, x, y) == 1 then
