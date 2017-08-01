@@ -1,6 +1,6 @@
 # Game_of_Love2d
 So this implementation has 1 unresolved glitch, but I lost interest in it and it's served it's educational purpose.
-#Dependencies
+# Dependencies
 LÖVE 0.10.2
 
 argparse
