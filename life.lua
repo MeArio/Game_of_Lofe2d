@@ -154,11 +154,8 @@ function life.step_a_generation(game_table)
         for x=1, #game_table[1] do
             alive = life.get_cell(game_table, x, y)
             if alive == 1 then
-                if life.underpopulation_check(game_table, x, y) then
-                    life.set_cell(next_gen, x, y, 0)
-                elseif life.overpopulation_check(game_table, x, y) then
-                    life.set_cell(next_gen, x, y, 0)
-                else
+                if (not life.underpopulation_check(game_table, x, y))
+                 and (not life.overpopulation_check(game_table, x, y)) then
                     life.set_cell(next_gen, x, y, 1)
                 end
             elseif alive == 0 then
