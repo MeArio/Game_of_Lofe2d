@@ -1,6 +1,0 @@
-- get neightbours function *
-- a function for each rule *
-- a stepping function *
-- a draw function
-- an update function
-    - a tick system
