@@ -1,5 +1,8 @@
 # Game_of_Love2d
-So this implementation has 1 unresolved glitch, but I lost interest in it and it's served it's educational purpose.
+So this implementation ~~has 1 unresolved glitch~~, but I lost interest in it and it's served it's educational purpose.
+
+
+Fixed the glitch.
 # Dependencies
 LÖVE 0.10.2
 
@@ -12,6 +15,12 @@ Linux:
     cp path_to_argparse libs/argparse
     love .
 ```
+
+
+Left mouse click to add pixel.
+
+
+Right mouse click to remove pixel.
 
 
 That's about it, press p for pause and n for next generation.

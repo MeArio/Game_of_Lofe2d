@@ -150,7 +150,8 @@ end
 -- @param table current generation
 -- @return table next generation
 function life.step_a_generation(game_table)
-    next_gen = life.generate_2darray(#game_table, #game_table[1])
+    next_gen = life.generate_2darray(#game_table[1], #game_table)
+    print(#game_table)
     for y=1, #game_table do
         for x=1, #game_table[1] do
             alive = life.get_cell(game_table, x, y)
@@ -199,7 +200,7 @@ function life.draw_table(game_table, scale)
         for y=1, height do
             if life.get_cell(game_table, x, y) == 1 then
                 love.graphics.setColor(255, 255, 255)
-                love.graphics.rectangle('fill', x * scale, y * scale, scale, scale)
+                love.graphics.rectangle('fill', (x-1) * scale, (y-1) * scale, scale, scale)
             end
         end
     end
